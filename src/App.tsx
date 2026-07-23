@@ -1,0 +1,154 @@
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
+
+import Navbar        from './components/Navbar';
+import Footer        from './components/Footer';
+import LoadingSpinner from './components/LoadingSpinner';
+import ScrollToTop   from './components/ScrollToTop';
+import BackToTop     from './components/BackToTop';
+import PageTransition from './components/PageTransition';
+
+/* ── Lazy pages ─────────────────────────────── */
+const Home                = lazy(() => import('./pages/Home'));
+const About               = lazy(() => import('./pages/About'));
+const Services            = lazy(() => import('./pages/Services'));
+const SolarEnergy         = lazy(() => import('./pages/Services/SolarEnergy'));
+const BuildingConstruction= lazy(() => import('./pages/Services/BuildingConstruction'));
+const DesignBuild         = lazy(() => import('./pages/Services/DesignBuild'));
+const CivilEngineering    = lazy(() => import('./pages/Services/CivilEngineering'));
+const RoadConstruction    = lazy(() => import('./pages/Services/RoadConstruction'));
+const Projects            = lazy(() => import('./pages/Projects'));
+const ProjectDetail       = lazy(() => import('./pages/Projects/ProjectDetail'));
+const Industries          = lazy(() => import('./pages/Industries'));
+const Equipment           = lazy(() => import('./pages/Equipment'));
+const Safety              = lazy(() => import('./pages/Safety'));
+const Certifications      = lazy(() => import('./pages/Certifications'));
+const Careers             = lazy(() => import('./pages/Careers'));
+const News                = lazy(() => import('./pages/News'));
+const Contact             = lazy(() => import('./pages/Contact'));
+const Sales               = lazy(() => import('./pages/Sales'));
+const AdminDashboard      = lazy(() => import('./admin/Dashboard'));
+const AdminProjects       = lazy(() => import('./admin/ProjectsAdmin'));
+const AdminGallery        = lazy(() => import('./admin/GalleryAdmin'));
+const AdminBlog           = lazy(() => import('./admin/BlogAdmin'));
+const AdminTeam           = lazy(() => import('./admin/TeamAdmin'));
+const AdminQuotes         = lazy(() => import('./admin/QuoteRequests'));
+
+/* ── Inner layout (needs useLocation) ───────── */
+const AppInner: React.FC = () => {
+  const location = useLocation();
+  const isAdmin  = location.pathname.startsWith('/admin');
+
+  return (
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* Scroll to top on every navigation */}
+      <ScrollToTop />
+
+      {/* Global toast notifications */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: { borderRadius: '12px', fontFamily: 'inherit', fontSize: '14px' },
+        }}
+      />
+
+      {/* Navbar hidden on admin routes */}
+      {!isAdmin && <Navbar />}
+
+      <main className="flex-grow">
+        <Suspense fallback={<LoadingSpinner />}>
+          {/* AnimatePresence enables exit animations between routes */}
+          <AnimatePresence mode="wait" initial={false}>
+            <Routes location={location} key={location.pathname}>
+              {/* ── Public pages ── */}
+              <Route path="/" element={
+                <PageTransition><Home /></PageTransition>
+              } />
+              <Route path="/about" element={
+                <PageTransition><About /></PageTransition>
+              } />
+
+              {/* Services */}
+              <Route path="/services" element={
+                <PageTransition><Services /></PageTransition>
+              } />
+              <Route path="/services/solar-energy" element={
+                <PageTransition><SolarEnergy /></PageTransition>
+              } />
+              <Route path="/services/building-construction" element={
+                <PageTransition><BuildingConstruction /></PageTransition>
+              } />
+              <Route path="/services/design-build" element={
+                <PageTransition><DesignBuild /></PageTransition>
+              } />
+              <Route path="/services/civil-engineering" element={
+                <PageTransition><CivilEngineering /></PageTransition>
+              } />
+              <Route path="/services/road-construction" element={
+                <PageTransition><RoadConstruction /></PageTransition>
+              } />
+
+              {/* Projects */}
+              <Route path="/projects" element={
+                <PageTransition><Projects /></PageTransition>
+              } />
+              <Route path="/projects/:id" element={
+                <PageTransition><ProjectDetail /></PageTransition>
+              } />
+
+              {/* Other */}
+              <Route path="/industries" element={
+                <PageTransition><Industries /></PageTransition>
+              } />
+              <Route path="/equipment" element={
+                <PageTransition><Equipment /></PageTransition>
+              } />
+              <Route path="/safety" element={
+                <PageTransition><Safety /></PageTransition>
+              } />
+              <Route path="/certifications" element={
+                <PageTransition><Certifications /></PageTransition>
+              } />
+              <Route path="/careers" element={
+                <PageTransition><Careers /></PageTransition>
+              } />
+              <Route path="/news" element={
+                <PageTransition><News /></PageTransition>
+              } />
+              <Route path="/contact" element={
+                <PageTransition><Contact /></PageTransition>
+              } />
+              <Route path="/sales" element={
+                <PageTransition><Sales /></PageTransition>
+              } />
+
+              {/* ── Admin routes (no transition wrapper needed) ── */}
+              <Route path="/admin"           element={<AdminDashboard />} />
+              <Route path="/admin/projects"  element={<AdminProjects />} />
+              <Route path="/admin/gallery"   element={<AdminGallery />} />
+              <Route path="/admin/blog"      element={<AdminBlog />} />
+              <Route path="/admin/team"      element={<AdminTeam />} />
+              <Route path="/admin/quotes"    element={<AdminQuotes />} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
+      </main>
+
+      {!isAdmin && <Footer />}
+
+      {/* Glowing back-to-top button */}
+      <BackToTop />
+    </div>
+  );
+};
+
+/* ── Root (provides Router context) ─────────── */
+const App: React.FC = () => (
+  <Router>
+    <AppInner />
+  </Router>
+);
+
+export default App;
