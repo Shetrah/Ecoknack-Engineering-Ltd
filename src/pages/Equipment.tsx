@@ -101,7 +101,7 @@ const Equipment: React.FC = () => (
         <motion.div initial="hidden" whileInView="visible"
           viewport={{ once: true }} variants={stagger}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {equipment.map((eq, i) => (
+          {equipment.map((eq) => (
             <motion.div key={eq.name} variants={fadeUp}
               className="bg-white rounded-2xl overflow-hidden border border-gray-100
                          shadow-card hover:shadow-card-hover hover:-translate-y-1
