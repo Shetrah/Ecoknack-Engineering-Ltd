@@ -1,10 +1,36 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Sun, Battery, CheckCircle } from 'lucide-react';
+import {
+  ArrowRight,
+  Zap,
+  Sun,
+  Battery,
+  CheckCircle,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
+
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const SolarEnergy: React.FC = () => {
   const features = [
@@ -18,71 +44,334 @@ const SolarEnergy: React.FC = () => {
     'Authorised Jinko Solar partner',
   ];
 
+  const solutions = [
+    {
+      icon: Sun,
+      label: 'Solar Panels',
+      desc: 'Premium solar panels designed for maximum energy efficiency.',
+    },
+    {
+      icon: Battery,
+      label: 'Battery Storage',
+      desc: 'Reliable energy storage for uninterrupted backup power.',
+    },
+    {
+      icon: Zap,
+      label: 'Grid-Tie Systems',
+      desc: 'Efficient systems designed to reduce your electricity bills.',
+    },
+    {
+      icon: CheckCircle,
+      label: 'Maintenance',
+      desc: 'Professional monitoring, servicing and ongoing support.',
+    },
+  ];
+
+  const solarImages = Array.from(
+    { length: 13 },
+    (_, index) => `/services/solar/solar-${index + 1}.jpg`
+  );
+
   return (
-    <div className="min-h-screen bg-white">
-      <section className="bg-gradient-to-r from-yellow-600 to-orange-500 text-white py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl">
-            <motion.p variants={fadeUp} className="bg-white/20 inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4">Services / Solar Energy</motion.p>
-            <motion.h1 variants={fadeUp} className="text-5xl font-bold mb-5">Solar Energy Power Backup Solutions</motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-white/85 leading-relaxed">
-              Ecoknack prides itself as a leader in this field. Our team are specialists in delivering high-quality solar panel installations. Whether it is a domestic or commercial project, our multi-award-winning green team is second to none.
+    <div className="min-h-screen bg-white overflow-hidden">
+
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+      <section className="relative bg-gradient-to-br from-yellow-700 via-yellow-600 to-orange-500 text-white py-24 lg:py-28 overflow-hidden">
+
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+            className="max-w-4xl"
+          >
+
+            <motion.div variants={fadeUp}>
+              <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                <Sun size={16} />
+                Services / Solar Energy
+              </span>
+            </motion.div>
+
+            <motion.h1
+              variants={fadeUp}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6"
+            >
+              Solar Energy &{' '}
+              <span className="text-yellow-100">
+                Power Backup Solutions
+              </span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-3xl"
+            >
+              Ecoknack prides itself as a leader in solar energy solutions.
+              Our specialist team delivers high-quality solar installations
+              for homes, businesses and industrial projects.
             </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex flex-wrap gap-4 mt-8"
+            >
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-white text-yellow-700 hover:bg-yellow-50 px-7 py-3.5 rounded-xl font-bold transition-all duration-300 shadow-lg"
+              >
+                Get Free Quote
+                <ArrowRight size={18} />
+              </Link>
+
+              <a
+                href="#solar-projects"
+                className="inline-flex items-center gap-2 border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-7 py-3.5 rounded-xl font-bold transition-all duration-300"
+              >
+                Explore Our Work
+              </a>
+            </motion.div>
+
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20">
+
+      {/* =====================================================
+          INTRODUCTION
+      ====================================================== */}
+      <section className="py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={stagger}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center"
+          >
+
+            {/* LEFT CONTENT */}
             <motion.div variants={fadeUp}>
-              <div className="inline-flex items-center gap-2 bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-5">
-                <Sun size={16} /> Authorised Jinko Solar Partner
+
+              <div className="inline-flex items-center gap-2 bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-5">
+                <Sun size={16} />
+                Authorised Jinko Solar Partner
               </div>
-              <h2 className="text-3xl font-bold text-primary mb-5">Clean Energy For Every Need</h2>
+
+              <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-6">
+                Clean Energy For Every Need
+              </h2>
+
               <p className="text-gray-600 leading-relaxed mb-5">
-                We have partnered and been authorised by leading solar manufacturer Jinko, to train, supply and install locally. This partnership ensures our clients receive world-class equipment installed to the highest standards.
+                We have partnered and been authorised by leading solar
+                manufacturer Jinko to train, supply and install locally.
+                This partnership ensures our clients receive world-class
+                equipment installed to the highest standards.
               </p>
+
               <p className="text-gray-600 leading-relaxed mb-8">
-                Our multi-award-winning green team handles everything from site assessment, system design and supply to installation and ongoing maintenance — whether it is a domestic rooftop or a large commercial installation.
+                Our multi-award-winning green team handles everything from
+                site assessment, system design and supply to installation
+                and ongoing maintenance — whether it is a domestic rooftop
+                or a large commercial installation.
               </p>
-              <div className="grid grid-cols-2 gap-3">
-                {features.map((f) => (
-                  <div key={f} className="flex items-start gap-2 text-sm text-gray-700">
-                    <CheckCircle size={16} className="text-accent flex-shrink-0 mt-0.5" />
-                    {f}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {features.map((feature) => (
+                  <div
+                    key={feature}
+                    className="flex items-start gap-3 text-sm text-gray-700"
+                  >
+                    <CheckCircle
+                      size={18}
+                      className="text-yellow-600 flex-shrink-0 mt-0.5"
+                    />
+
+                    <span>{feature}</span>
                   </div>
                 ))}
               </div>
+
             </motion.div>
 
-            <motion.div variants={fadeUp} className="grid grid-cols-2 gap-4">
-              {[
-                { icon: Sun, label: 'Solar Panels', desc: 'Premium Jinko panels for maximum efficiency' },
-                { icon: Battery, label: 'Battery Storage', desc: 'Reliable backup power for homes & businesses' },
-                { icon: Zap, label: 'Grid-Tie', desc: 'Feed excess power back and reduce bills' },
-                { icon: CheckCircle, label: 'Maintenance', desc: 'Ongoing support and monitoring service' },
-              ].map((item) => (
-                <div key={item.label} className="bg-yellow-50 rounded-xl p-6 border border-yellow-100">
-                  <item.icon size={28} className="text-yellow-600 mb-3" />
-                  <h4 className="font-bold text-primary text-sm mb-1">{item.label}</h4>
-                  <p className="text-gray-500 text-xs">{item.desc}</p>
-                </div>
-              ))}
+
+            {/* RIGHT CARDS */}
+            <motion.div
+              variants={fadeUp}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            >
+
+              {solutions.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <motion.div
+                    key={item.label}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="group bg-yellow-50 hover:bg-white rounded-2xl p-6 border border-yellow-100 hover:border-yellow-200 hover:shadow-xl transition-all duration-300"
+                  >
+
+                    <div className="w-12 h-12 rounded-xl bg-yellow-100 group-hover:bg-yellow-600 flex items-center justify-center mb-5 transition-colors duration-300">
+                      <Icon
+                        size={25}
+                        className="text-yellow-600 group-hover:text-white transition-colors duration-300"
+                      />
+                    </div>
+
+                    <h3 className="font-bold text-primary text-lg mb-2">
+                      {item.label}
+                    </h3>
+
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+
+                  </motion.div>
+                );
+              })}
+
             </motion.div>
+
           </motion.div>
         </div>
       </section>
 
-      <section className="py-16 bg-yellow-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Go Solar Today</h2>
-          <p className="text-white/80 mb-8">Get a free site assessment and quote from our certified solar installation team.</p>
-          <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-yellow-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold transition-all">
-            Get Free Quote <ArrowRight size={18} />
-          </Link>
+
+      {/* =====================================================
+          SOLAR PROJECT GALLERY
+      ====================================================== */}
+      <section
+        id="solar-projects"
+        className="relative py-20 lg:py-28 bg-gray-50"
+      >
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* SECTION HEADING */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="max-w-3xl mb-14"
+          >
+
+            <motion.span
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold mb-5"
+            >
+              <Sun size={16} />
+              Solar Projects
+            </motion.span>
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-5"
+            >
+              Powering a Cleaner Future
+            </motion.h2>
+
+            <motion.p
+              variants={fadeUp}
+              className="text-gray-600 text-lg leading-relaxed"
+            >
+              A look at some of the solar installations and renewable energy
+              solutions delivered by the Ecoknack team.
+            </motion.p>
+
+          </motion.div>
+
+
+          {/* =================================================
+              MASONRY STYLE GALLERY
+          ================================================== */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={stagger}
+            className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]"
+          >
+
+            {solarImages.map((image, index) => (
+              <motion.div
+                key={image}
+                variants={fadeUp}
+                className="group relative mb-5 break-inside-avoid overflow-hidden rounded-2xl bg-gray-200 shadow-sm hover:shadow-2xl transition-all duration-500"
+              >
+
+                <img
+                  src={image}
+                  alt={`Ecoknack solar installation ${index + 1}`}
+                  loading="lazy"
+                  className="w-full h-auto block object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+
+                {/* HOVER OVERLAY */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Decorative corner */}
+                <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
+                  <Sun
+                    size={18}
+                    className="text-yellow-600"
+                  />
+                </div>
+
+              </motion.div>
+            ))}
+
+          </motion.div>
+
         </div>
       </section>
+
+
+      {/* =====================================================
+          CTA
+      ====================================================== */}
+      <section className="relative py-20 lg:py-24 bg-gradient-to-br from-yellow-600 to-orange-500 text-white overflow-hidden">
+
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-orange-300/20 rounded-full blur-3xl" />
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+          <Sun
+            size={42}
+            className="mx-auto mb-5 text-yellow-100"
+          />
+
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Go Solar Today
+          </h2>
+
+          <p className="text-white/85 text-lg mb-8 max-w-2xl mx-auto">
+            Get a free site assessment and quote from our certified solar
+            installation team.
+          </p>
+
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-white text-yellow-700 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Get Free Quote
+            <ArrowRight size={18} />
+          </Link>
+
+        </div>
+      </section>
+
     </div>
   );
 };

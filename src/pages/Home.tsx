@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import Hero from '../components/Hero';
 import StatCounter from '../components/StatCounter';
+import { defaultProjects } from '../data/siteContent';
 
 /* ── Helpers ── */
 const fadeUp = (delay = 0) => ({
@@ -75,26 +76,12 @@ const values = [
   { icon: Leaf,       title: 'Sustainability',         desc: 'Upholding effective environmental and sustainable practices on every project we deliver.',            accent: 'bg-green-50 text-green-600' },
 ];
 
-const featuredProjects = [
-  {
-    title: 'Rubis UN Avenue',
-    category: 'Design & Build',
-    desc: 'Flagship gas station — stunning full transformation with striking architectural details.',
-    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&auto=format&fit=crop&q=75',
-  },
-  {
-    title: 'Road Works & Drainage',
-    category: 'Civil Engineering',
-    desc: 'Bituminous and cabro roads with precision layering for heavy traffic across Kenya.',
-    img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=75',
-  },
-  {
-    title: 'Warehouses & Godowns',
-    category: 'Building Construction',
-    desc: 'End-to-end design, fabrication and erection of industrial storage facilities.',
-    img: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&auto=format&fit=crop&q=75',
-  },
-];
+const featuredProjects = defaultProjects.slice(0, 3).map((project) => ({
+  title: project.title,
+  category: project.category,
+  desc: project.desc,
+  img: project.image,
+}));
 
 const clients = [
   'Shell', 'Rubis', 'OLA Energy', 'Kobil', 'American Tower',

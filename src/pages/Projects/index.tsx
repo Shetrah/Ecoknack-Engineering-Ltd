@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db, isFirebaseConfigured } from '../../lib/firebase';
+import { defaultProjects, type ProjectRecord } from '../../data/siteContent';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 30 },
@@ -9,98 +12,28 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
 
-const categories = ['All', 'Design & Build', 'Solar Energy', 'Road Works', 'Building', 'Civil'];
-
-/* Real Unsplash images per category */
-const projects = [
-  {
-    id: 'rubis-un-avenue',
-    title: 'Rubis UN Avenue',
-    category: 'Design & Build',
-    desc: 'Flagship gas station — a stunning transformation, whole station upgrade with striking architectural details.',
-    img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'ola-energy-stations',
-    title: 'OLA Energy Stations',
-    category: 'Design & Build',
-    desc: 'Full design and build for OLA Energy fuel stations across Kenya including canopy, forecourt and facilities.',
-    img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'kobil-station-upgrade',
-    title: 'Kobil Station Upgrade',
-    category: 'Design & Build',
-    desc: 'Comprehensive station upgrade delivering exceptional renovation results that exceed client expectations.',
-    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'shell-stations',
-    title: 'Shell Stations',
-    category: 'Design & Build',
-    desc: 'Multiple Shell fuel station construction and refurbishment projects across Nairobi and Kenya.',
-    img: 'https://images.unsplash.com/photo-1590644365607-5b8b4e4a2a34?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'solar-installations',
-    title: 'Commercial Solar Installations',
-    category: 'Solar Energy',
-    desc: 'High-quality commercial and industrial solar panel installations as authorised Jinko Solar partner.',
-    img: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'road-nairobi',
-    title: 'Nairobi Road Works',
-    category: 'Road Works',
-    desc: 'Bituminous and cabro road construction with precision layering for optimal load distribution.',
-    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'drainage-projects',
-    title: 'Drainage & Infrastructure',
-    category: 'Civil',
-    desc: 'Road drainage channels, culverts and storm-water management systems across multiple counties.',
-    img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'warehouses-godowns',
-    title: 'Warehouses & Godowns',
-    category: 'Building',
-    desc: 'From design to delivery — one-stop service including customised design, fabrication and erection.',
-    img: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'american-tower',
-    title: 'American Tower Sites',
-    category: 'Civil',
-    desc: 'Telecom tower foundation, civils and electrical works for American Tower Corporation across Kenya.',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'eaton-towers',
-    title: 'Eaton Towers Projects',
-    category: 'Civil',
-    desc: 'Civil and electrical infrastructure works for Eaton Towers telecom sites across East Africa.',
-    img: 'https://images.unsplash.com/photo-1607400201889-f39cbeafb61c?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'unilever-factory',
-    title: 'Unilever Facility Works',
-    category: 'Building',
-    desc: 'Industrial facility construction and refurbishment works for Unilever East Africa.',
-    img: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=700&auto=format&fit=crop&q=75',
-  },
-  {
-    id: 'kakamega-roads',
-    title: 'Kakamega County Roads',
-    category: 'Road Works',
-    desc: 'County road construction and drainage works delivered for Kakamega County Government.',
-    img: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=700&auto=format&fit=crop&q=75',
-  },
-];
-
 const Projects: React.FC = () => {
+  const [projects, setProjects] = useState<ProjectRecord[]>(defaultProjects);
   const [active, setActive] = useState('All');
+
+  useEffect(() => {
+    if (!isFirebaseConfigured || !db) {
+      setProjects(defaultProjects);
+      return;
+    }
+
+    const unsubscribe = onSnapshot(collection(db, 'projects'), (snapshot) => {
+      const items = snapshot.docs.map((docItem) => ({
+        id: docItem.id,
+        ...(docItem.data() as Omit<ProjectRecord, 'id'>),
+      })) as ProjectRecord[];
+      setProjects(items.length ? items : defaultProjects);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const categoryList = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => project.category)))], [projects]);
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active);
 
   return (
@@ -160,7 +93,7 @@ const Projects: React.FC = () => {
 
           {/* Filter pills */}
           <div className="flex flex-wrap gap-2 justify-center mb-10">
-            {categories.map((cat) => (
+            {categoryList.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
@@ -193,7 +126,7 @@ const Projects: React.FC = () => {
                              transition-all duration-300 bg-white">
                   {/* Image */}
                   <div className="h-44 overflow-hidden relative">
-                    <img src={project.img} alt={project.title}
+                    <img src={project.image} alt={project.title}
                          className="w-full h-full object-cover
                                     group-hover:scale-105 transition-transform duration-500"
                          loading="lazy" />

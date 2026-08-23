@@ -9,6 +9,8 @@ const services = [
   { label: 'Design & Build',          path: '/services/design-build' },
   { label: 'Civil Engineering',       path: '/services/civil-engineering' },
   { label: 'Road Construction',       path: '/services/road-construction' },
+  { label: 'Interior Design',         path: '/services/interior-design' },
+  { label: 'Plant Machinery',         path: '/services/plant-machinery'},
 ];
 
 const navLinks = [
