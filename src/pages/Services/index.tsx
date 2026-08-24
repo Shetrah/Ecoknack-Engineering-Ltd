@@ -11,6 +11,7 @@ import {
   Layers,
   Palette,
   Construction,
+  Fuel,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -86,11 +87,19 @@ const services = [
     link: '/services/plant-machinery',
     color: 'bg-amber-50 border-amber-400',
   },
+  {
+    icon: Fuel,
+    title: 'Petrol Stations & Hospitals',
+    desc: 'Specialised construction and engineering solutions for petrol stations, hospitals, and other critical facilities.',
+    link: '/services/Petrol-hospital',
+    color: 'bg-blue-50 border-blue-400',
+  },
 ];
 
 const Services: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
+
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-secondary text-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,6 +138,7 @@ const Services: React.FC = () => {
       {/* Services Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -151,19 +161,24 @@ const Services: React.FC = () => {
                     transition-all duration-300 group
                   `}
                 >
+
+                  {/* Service Icon */}
                   <s.icon
                     size={36}
                     className="text-primary mb-5 group-hover:text-secondary transition-colors"
                   />
 
+                  {/* Service Title */}
                   <h3 className="text-xl font-bold text-primary mb-3">
                     {s.title}
                   </h3>
 
+                  {/* Service Description */}
                   <p className="text-gray-500 text-sm leading-relaxed mb-6">
                     {s.desc}
                   </p>
 
+                  {/* Learn More */}
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-secondary">
                     Learn more
                     <ArrowRight
@@ -171,16 +186,19 @@ const Services: React.FC = () => {
                       className="group-hover:translate-x-1 transition-transform"
                     />
                   </span>
+
                 </Link>
               </motion.div>
             ))}
           </motion.div>
+
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
           <h2 className="text-3xl font-bold mb-4">
             Get a Free Consultation
           </h2>
@@ -197,8 +215,10 @@ const Services: React.FC = () => {
             Request a Quote
             <ArrowRight size={18} />
           </Link>
+
         </div>
       </section>
+
     </div>
   );
 };

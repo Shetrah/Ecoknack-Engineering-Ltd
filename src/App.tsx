@@ -16,13 +16,19 @@ import BackToTop from './components/BackToTop';
 import PageTransition from './components/PageTransition';
 import AdminAuthGate from './admin/AdminAuthGate';
 
-/* ── Lazy pages ─────────────────────────────── */
+/* ─────────────────────────────────────────────
+   Lazy Pages
+───────────────────────────────────────────── */
+
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 
 const Services = lazy(() => import('./pages/Services'));
 
-/* ── Service pages ──────────────────────────── */
+/* ─────────────────────────────────────────────
+   Service Pages
+───────────────────────────────────────────── */
+
 const SolarEnergy = lazy(
   () => import('./pages/Services/SolarEnergy')
 );
@@ -51,7 +57,18 @@ const PlantMachinery = lazy(
   () => import('./pages/Services/PlantMachinery')
 );
 
-/* ── Other pages ────────────────────────────── */
+const CNCFabrication = lazy(
+  () => import('./pages/Services/CNCFabrication')
+);
+
+const PetrolHospital = lazy(
+  () => import('./pages/Services/PetrolHospital')
+);
+
+/* ─────────────────────────────────────────────
+   Other Pages
+───────────────────────────────────────────── */
+
 const Projects = lazy(() => import('./pages/Projects'));
 
 const ProjectDetail = lazy(
@@ -59,15 +76,27 @@ const ProjectDetail = lazy(
 );
 
 const Industries = lazy(() => import('./pages/Industries'));
+
 const Equipment = lazy(() => import('./pages/Equipment'));
+
 const Safety = lazy(() => import('./pages/Safety'));
-const Certifications = lazy(() => import('./pages/Certifications'));
+
+const Certifications = lazy(
+  () => import('./pages/Certifications')
+);
+
 const Careers = lazy(() => import('./pages/Careers'));
+
 const News = lazy(() => import('./pages/News'));
+
 const Contact = lazy(() => import('./pages/Contact'));
+
 const Sales = lazy(() => import('./pages/Sales'));
 
-/* ── Admin pages ────────────────────────────── */
+/* ─────────────────────────────────────────────
+   Admin Pages
+───────────────────────────────────────────── */
+
 const AdminDashboard = lazy(
   () => import('./admin/Dashboard')
 );
@@ -92,7 +121,10 @@ const AdminQuotes = lazy(
   () => import('./admin/QuoteRequests')
 );
 
-/* ── Inner layout ───────────────────────────── */
+/* ─────────────────────────────────────────────
+   Inner Application Layout
+───────────────────────────────────────────── */
+
 const AppInner: React.FC = () => {
   const location = useLocation();
 
@@ -104,7 +136,7 @@ const AppInner: React.FC = () => {
       {/* Scroll to top on every navigation */}
       <ScrollToTop />
 
-      {/* Global toast notifications */}
+      {/* Global Toast Notifications */}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -120,12 +152,14 @@ const AppInner: React.FC = () => {
       {!isAdmin && <Navbar />}
 
       <main className="flex-grow">
+
         <Suspense fallback={<LoadingSpinner />}>
 
           <AnimatePresence
             mode="wait"
             initial={false}
           >
+
             <Routes
               location={location}
               key={location.pathname}
@@ -216,7 +250,15 @@ const AppInner: React.FC = () => {
                 }
               />
 
-                      
+              {/* CNC & Fabrication */}
+              <Route
+                path="/services/cnc-fabrication"
+                element={
+                  <PageTransition>
+                    <CNCFabrication />
+                  </PageTransition>
+                }
+              />
 
               {/* Interior Design & Finishes */}
               <Route
@@ -234,6 +276,16 @@ const AppInner: React.FC = () => {
                 element={
                   <PageTransition>
                     <PlantMachinery />
+                  </PageTransition>
+                }
+              />
+
+              {/* Petrol Stations & Hospitals */}
+              <Route
+                path="/services/Petrol-hospital"
+                element={
+                  <PageTransition>
+                    <PetrolHospital />
                   </PageTransition>
                 }
               />
@@ -408,22 +460,27 @@ const AppInner: React.FC = () => {
               />
 
             </Routes>
+
           </AnimatePresence>
 
         </Suspense>
+
       </main>
 
       {/* Footer hidden on admin routes */}
       {!isAdmin && <Footer />}
 
-      {/* Glowing back-to-top button */}
+      {/* Glowing Back-to-Top Button */}
       <BackToTop />
 
     </div>
   );
 };
 
-/* ── Root ───────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   Root Application
+───────────────────────────────────────────── */
+
 const App: React.FC = () => (
   <Router>
     <AppInner />

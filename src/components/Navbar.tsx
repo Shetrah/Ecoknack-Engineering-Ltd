@@ -11,6 +11,8 @@ const services = [
   { label: 'Road Construction',       path: '/services/road-construction' },
   { label: 'Interior Design',         path: '/services/interior-design' },
   { label: 'Plant Machinery',         path: '/services/plant-machinery'},
+  { label: 'CNC Machining & Fabrication', path: '/services/cnc-machining-fabrication' },
+  { label: 'Petrol Station & Hospital',   path: '/services/petrol-station-hospital' },
 ];
 
 const navLinks = [

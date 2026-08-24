@@ -2,14 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  MapPin,
   CheckCircle,
-  Construction,
-  Route,
-  Waves,
-  ShieldCheck,
+  Cog,
+  Factory,
+  Settings,
   Wrench,
   ExternalLink,
+  ShieldCheck,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -36,50 +35,54 @@ const stagger = {
   },
 };
 
-const RoadConstruction: React.FC = () => {
+const CNCFabrication: React.FC = () => {
   const services = [
-    'Bituminous road construction',
-    'Cabro paving & installation',
-    'Sub-base & base preparation',
-    'Surface dressing',
-    'Road drainage systems',
-    'Culverts & crossings',
-    'Road markings',
-    'Maintenance & repairs',
+    'Structural steel fabrication',
+    'CNC machining',
+    'Precision component fabrication',
+    'Concrete floor hardening',
+    'Roofing & cladding systems',
+    'Loading bay construction',
+    'Industrial steelwork',
+    'Custom metal fabrication',
+    'Machine components',
+    'Commercial fabrication',
+    'Installation & assembly',
+    'Maintenance & modifications',
   ];
 
   const solutions = [
     {
-      icon: Route,
-      title: 'Bituminous Roads',
-      desc: 'High-quality asphalt roads engineered for longevity and heavy traffic resistance with properly compacted layers.',
+      icon: Cog,
+      title: 'CNC Machining',
+      desc: 'Precision machining and component production for demanding industrial and commercial applications.',
     },
     {
-      icon: Construction,
-      title: 'Cabro Paving',
-      desc: 'Interlocking concrete block paving for driveways, parking areas, walkways and urban roads.',
+      icon: Factory,
+      title: 'Steel Fabrication',
+      desc: 'Custom structural steelwork and metal fabrication engineered for strength, durability and performance.',
     },
     {
-      icon: Waves,
-      title: 'Drainage Works',
-      desc: 'Comprehensive drainage solutions including channels, culverts and storm-water management systems.',
+      icon: Settings,
+      title: 'Industrial Solutions',
+      desc: 'Fabrication and construction solutions tailored to industrial environments and operational requirements.',
     },
     {
       icon: Wrench,
-      title: 'Road Maintenance',
-      desc: 'Professional road repairs, resurfacing and maintenance designed to extend infrastructure lifespan.',
+      title: 'Installation & Assembly',
+      desc: 'Professional installation, assembly and finishing of fabricated structures and components.',
     },
   ];
 
   const projectImages = [
-    '/projects/road-1.jpg',
-    '/projects/road-2.jpg',
-    '/projects/road-3.jpg',
-    '/projects/road-4.jpg',
+    '/projects/cnc-1.jpg',
+    '/projects/cnc-2.jpg',
+    '/projects/cnc-3.jpg',
+    '/projects/cnc-4.jpg',
   ];
 
   const googlePhotosUrl =
-    'https://photos.app.goo.gl/93m28aGSD9MhtpQaA';
+    'https://photos.app.goo.gl/vXCPdsj2sFBNCTDu8';
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -87,15 +90,15 @@ const RoadConstruction: React.FC = () => {
       {/* =====================================================
           HERO
       ====================================================== */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-slate-700 text-white py-24 lg:py-28 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-primary via-slate-900 to-blue-900 text-white py-24 lg:py-28 overflow-hidden">
 
         {/* Decorative background */}
-        <div className="absolute -top-40 -right-40 w-[30rem] h-[30rem] bg-gray-500/20 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-[30rem] h-[30rem] bg-blue-500/20 rounded-full blur-3xl" />
 
         <div className="absolute -bottom-40 -left-40 w-[30rem] h-[30rem] bg-secondary/15 rounded-full blur-3xl" />
 
-        {/* Subtle technical grid */}
-        <div className="absolute inset-0 opacity-[0.035]">
+        {/* Technical grid */}
+        <div className="absolute inset-0 opacity-[0.04]">
           <div
             className="w-full h-full"
             style={{
@@ -118,8 +121,8 @@ const RoadConstruction: React.FC = () => {
             {/* Breadcrumb */}
             <motion.div variants={fadeUp}>
               <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                <MapPin size={16} />
-                Services / Road Construction
+                <Cog size={16} />
+                Services / CNC Machining & Fabrication
               </span>
             </motion.div>
 
@@ -128,9 +131,9 @@ const RoadConstruction: React.FC = () => {
               variants={fadeUp}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6"
             >
-              Road Construction &{' '}
-              <span className="text-gray-300">
-                Paving
+              CNC Machining &{' '}
+              <span className="text-blue-200">
+                Fabrication
               </span>
             </motion.h1>
 
@@ -139,9 +142,9 @@ const RoadConstruction: React.FC = () => {
               variants={fadeUp}
               className="text-lg sm:text-xl text-white/85 leading-relaxed max-w-3xl"
             >
-              Comprehensive road construction and paving services for urban
-              and rural infrastructure projects, engineered for durability,
-              safety and long-term performance.
+              Precision CNC machining and fabrication services for
+              industrial and commercial applications, combining advanced
+              workmanship with reliable engineering solutions.
             </motion.p>
 
             {/* Buttons */}
@@ -154,12 +157,12 @@ const RoadConstruction: React.FC = () => {
                 to="/contact"
                 className="inline-flex items-center gap-2 bg-secondary hover:bg-orange-500 text-white px-7 py-3.5 rounded-xl font-bold transition-all duration-300 shadow-lg"
               >
-                Get a Quote
+                Request a Quote
                 <ArrowRight size={18} />
               </Link>
 
               <a
-                href="#road-projects"
+                href="#cnc-projects"
                 className="inline-flex items-center gap-2 border border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-7 py-3.5 rounded-xl font-bold transition-all duration-300"
               >
                 View Our Work
@@ -189,29 +192,29 @@ const RoadConstruction: React.FC = () => {
             {/* LEFT CONTENT */}
             <motion.div variants={fadeUp}>
 
-              <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mb-6">
-                <MapPin
+              <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6">
+                <Cog
                   size={30}
                   className="text-secondary"
                 />
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-6">
-                Precision Road Engineering
+                Precision Engineering & Fabrication
               </h2>
 
               <p className="text-gray-600 leading-relaxed mb-5">
-                Our road construction team delivers durable,
-                high-performance roads engineered to handle heavy traffic
-                loads. We use modern machinery and proven techniques to
-                ensure every layer meets demanding construction standards.
+                Ecoknack delivers CNC machining and fabrication solutions
+                designed for industrial, commercial and construction
+                applications where precision, strength and reliability
+                matter.
               </p>
 
               <p className="text-gray-600 leading-relaxed mb-8">
-                From rural access roads to urban streets, we manage every
-                aspect of road construction including earthworks, drainage,
-                pavement layers and finishing. Our team is experienced in
-                delivering complete road infrastructure solutions.
+                From structural steel fabrication and custom components to
+                roofing systems, loading bays and concrete floor
+                hardening, our team provides practical solutions from
+                fabrication through to installation.
               </p>
 
               {/* Services */}
@@ -223,7 +226,7 @@ const RoadConstruction: React.FC = () => {
                   >
                     <CheckCircle
                       size={18}
-                      className="text-secondary flex-shrink-0 mt-0.5"
+                      className="text-accent flex-shrink-0 mt-0.5"
                     />
 
                     <span>{service}</span>
@@ -248,10 +251,10 @@ const RoadConstruction: React.FC = () => {
                     key={item.title}
                     whileHover={{ y: -6 }}
                     transition={{ duration: 0.25 }}
-                    className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300"
+                    className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-100 hover:border-blue-100 hover:shadow-xl transition-all duration-300"
                   >
 
-                    <div className="w-12 h-12 rounded-xl bg-gray-100 group-hover:bg-secondary flex items-center justify-center mb-5 transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 group-hover:bg-secondary flex items-center justify-center mb-5 transition-colors duration-300">
                       <Icon
                         size={24}
                         className="text-secondary group-hover:text-white transition-colors duration-300"
@@ -278,7 +281,7 @@ const RoadConstruction: React.FC = () => {
 
 
       {/* =====================================================
-          ENGINEERING STRIP
+          FEATURE STRIP
       ====================================================== */}
       <section className="py-6 bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -286,72 +289,61 @@ const RoadConstruction: React.FC = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
 
             <div className="flex items-center gap-3">
-              <Construction
+              <Cog
                 size={22}
                 className="text-secondary"
               />
-
               <div>
                 <p className="font-bold text-primary text-sm">
-                  Earthworks
+                  Precision
                 </p>
-
                 <p className="text-gray-500 text-xs">
-                  Ground preparation
+                  Accurate fabrication
                 </p>
               </div>
             </div>
-
-
-            <div className="flex items-center gap-3">
-              <Route
-                size={22}
-                className="text-secondary"
-              />
-
-              <div>
-                <p className="font-bold text-primary text-sm">
-                  Pavement
-                </p>
-
-                <p className="text-gray-500 text-xs">
-                  Durable road surfaces
-                </p>
-              </div>
-            </div>
-
-
-            <div className="flex items-center gap-3">
-              <Waves
-                size={22}
-                className="text-secondary"
-              />
-
-              <div>
-                <p className="font-bold text-primary text-sm">
-                  Drainage
-                </p>
-
-                <p className="text-gray-500 text-xs">
-                  Storm-water control
-                </p>
-              </div>
-            </div>
-
 
             <div className="flex items-center gap-3">
               <ShieldCheck
                 size={22}
                 className="text-secondary"
               />
-
               <div>
                 <p className="font-bold text-primary text-sm">
-                  Safety
+                  Quality
                 </p>
-
                 <p className="text-gray-500 text-xs">
-                  Reliable infrastructure
+                  Built to perform
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Factory
+                size={22}
+                className="text-secondary"
+              />
+              <div>
+                <p className="font-bold text-primary text-sm">
+                  Industrial
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Commercial solutions
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Wrench
+                size={22}
+                className="text-secondary"
+              />
+              <div>
+                <p className="font-bold text-primary text-sm">
+                  Complete Service
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Fabrication to installation
                 </p>
               </div>
             </div>
@@ -366,7 +358,7 @@ const RoadConstruction: React.FC = () => {
           PROJECT GALLERY
       ====================================================== */}
       <section
-        id="road-projects"
+        id="cnc-projects"
         className="py-20 lg:py-28 bg-white"
       >
 
@@ -383,25 +375,25 @@ const RoadConstruction: React.FC = () => {
 
             <motion.span
               variants={fadeUp}
-              className="inline-flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold mb-5"
+              className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-5"
             >
-              <Route size={16} />
-              Our Road Projects
+              <Factory size={16} />
+              Our Fabrication Projects
             </motion.span>
 
             <motion.h2
               variants={fadeUp}
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-5"
             >
-              Roads Built to Perform
+              Built With Precision
             </motion.h2>
 
             <motion.p
               variants={fadeUp}
               className="text-gray-600 text-lg leading-relaxed"
             >
-              Explore selected road construction, paving and infrastructure
-              projects delivered by the Ecoknack team.
+              Explore selected CNC machining, fabrication and industrial
+              construction projects completed by the Ecoknack team.
             </motion.p>
 
           </motion.div>
@@ -431,7 +423,7 @@ const RoadConstruction: React.FC = () => {
 
                 <img
                   src={image}
-                  alt={`Ecoknack road construction project ${index + 1}`}
+                  alt={`Ecoknack CNC fabrication project ${index + 1}`}
                   loading="lazy"
                   className={`w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${
                     index === 0
@@ -440,12 +432,12 @@ const RoadConstruction: React.FC = () => {
                   }`}
                 />
 
-                {/* Hover overlay */}
+                {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Corner icon */}
                 <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300">
-                  <Route
+                  <Cog
                     size={18}
                     className="text-primary"
                   />
@@ -468,9 +460,9 @@ const RoadConstruction: React.FC = () => {
             className="mt-14"
           >
 
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-slate-700 text-white px-6 py-10 sm:px-10 lg:px-14">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-blue-900 text-white px-6 py-10 sm:px-10 lg:px-14">
 
-              <div className="absolute -top-24 -right-24 w-72 h-72 bg-gray-500/20 rounded-full blur-3xl" />
+              <div className="absolute -top-24 -right-24 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl" />
 
               <div className="absolute -bottom-32 -left-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
 
@@ -478,8 +470,8 @@ const RoadConstruction: React.FC = () => {
 
                 <div className="max-w-2xl">
 
-                  <span className="text-gray-300 text-sm font-semibold uppercase tracking-wider">
-                    More Road Projects
+                  <span className="text-blue-200 text-sm font-semibold uppercase tracking-wider">
+                    More Fabrication Projects
                   </span>
 
                   <h3 className="text-2xl sm:text-3xl font-bold mt-2 mb-3">
@@ -487,8 +479,9 @@ const RoadConstruction: React.FC = () => {
                   </h3>
 
                   <p className="text-white/70 leading-relaxed">
-                    View more of our road construction, paving, drainage and
-                    infrastructure projects in our complete photo gallery.
+                    See more of our CNC machining, structural fabrication,
+                    industrial works and completed projects in our full
+                    photo gallery.
                   </p>
 
                 </div>
@@ -516,33 +509,33 @@ const RoadConstruction: React.FC = () => {
       {/* =====================================================
           FINAL CTA
       ====================================================== */}
-      <section className="relative py-20 lg:py-24 bg-primary text-white overflow-hidden">
+      <section className="relative py-20 lg:py-24 bg-gradient-to-br from-primary via-slate-900 to-blue-900 text-white overflow-hidden">
 
-        <div className="absolute -top-24 -right-24 w-80 h-80 bg-gray-400/20 rounded-full blur-3xl" />
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl" />
 
         <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-          <MapPin
+          <Cog
             size={42}
-            className="mx-auto mb-5 text-gray-300"
+            className="mx-auto mb-5 text-blue-200"
           />
 
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Build Better Roads With Us
+            Need Precision Fabrication?
           </h2>
 
           <p className="text-white/75 text-lg mb-8 max-w-2xl mx-auto">
-            Contact our road construction specialists for a site assessment
-            and competitive quote.
+            Talk to the Ecoknack team about your CNC machining,
+            fabrication or industrial construction requirements.
           </p>
 
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 bg-secondary hover:bg-orange-500 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl"
           >
-            Get a Quote
+            Request a Quote
             <ArrowRight size={18} />
           </Link>
 
@@ -553,4 +546,4 @@ const RoadConstruction: React.FC = () => {
   );
 };
 
-export default RoadConstruction;
+export default CNCFabrication;
